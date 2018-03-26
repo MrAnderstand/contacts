@@ -34,7 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'html',
             ],
-            'created_at:date',
+            [
+                'attribute' => 'created_at',
+                'format' => ['date', 'long'],
+            ],
 
             ['class' => 'yii\grid\ActionColumn', 'template' => '{delete}'
                 // , 'buttons' => [

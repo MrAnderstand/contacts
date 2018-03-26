@@ -24,7 +24,7 @@ class m180326_155508_create_contact_table extends Migration
         $faker = Factory::create('ru_RU');
         $rows = [];
         for ($i = 0; $i < self::COUNT; $i++) {
-            $time = time();
+            $time = $faker->dateTimeBetween('-5 years')->getTimestamp();
             $rows[] = [
                 'name' => $faker->name,
                 'created_at' => $time,
