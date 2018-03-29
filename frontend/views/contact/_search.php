@@ -22,7 +22,6 @@ use yii\widgets\ActiveForm;
         'inputOptions' => [
             'class' => 'form-control',
             'placeholder' => 'Введите название контакта для поиска',
-            'tabindex'=>0
         ],
         'template' => "<div class='input-group'>{input}<span class='input-group-btn'>" .
             Html::submitButton('Поиск', ['class' => 'btn btn-primary']) . 

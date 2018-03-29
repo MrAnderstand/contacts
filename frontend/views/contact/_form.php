@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['create'],
         'method' => 'post',
+        'validateOnBlur' => false,
         'options' => [
             'data-pjax' => 1
         ]]); ?>
@@ -24,7 +25,7 @@ use yii\widgets\ActiveForm;
         ],
             'template' => "<div class='input-group'>{input}<span class='input-group-btn'>" .
             Html::submitButton('Добавить контакт', ['class' => 'btn btn-success']) . 
-            "</span></div>",
+            "</span></div>\n{hint}\n{error}",
     ])->textInput(['maxlength' => true]) ?>
 
     <?php ActiveForm::end(); ?>

@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['create'],
         'method' => 'post',
+        'validateOnBlur' => false,
         'options' => [
             'data-pjax' => 1
         ]]); ?>
@@ -22,12 +23,13 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'phone_number', [
         'inputOptions' => [
             'class' => 'form-control',
-            'placeholder' => $model->getAttributeLabel('phone_number')
         ],
-            'template' => "<div class='input-group'>{input}<span class='input-group-btn'>" .
+        'template' => "<div class='input-group'>{input}<span class='input-group-btn'>" .
             Html::submitButton('Добавить номер', ['class' => 'btn btn-success']) . 
-            "</span></div>",
-    ])->textInput(['maxlength' => true]) ?>
+            "</span></div>\n{hint}\n{error}",
+    ])->widget(\yii\widgets\MaskedInput::className(), [
+        'mask' => '+7 (999) 999-9999',
+    ]); ?>
 
     <?php ActiveForm::end(); ?>
 

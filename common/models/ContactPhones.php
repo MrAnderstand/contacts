@@ -44,7 +44,8 @@ class ContactPhones extends \yii\db\ActiveRecord
         return [
             [['contact_id', 'phone_number'], 'required'],
             [['contact_id', 'created_at', 'updated_at'], 'integer'],
-            [['phone_number'], 'string', 'max' => 32],
+            ['phone_number', 'match', 'pattern' => '/^[()0-9-+\s]+$/'],
+            [['phone_number'], 'string', 'length' => 17],
             [['contact_id'], 'exist', 'skipOnError' => true, 'targetClass' => Contact::className(), 'targetAttribute' => ['contact_id' => 'id']],
         ];
     }

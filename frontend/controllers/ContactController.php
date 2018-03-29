@@ -65,13 +65,14 @@ class ContactController extends Controller
     public function actionCreate()
     {
         $model = new Contact();
+        $model->load(Yii::$app->request->post());
+        $model->save();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $queryParams = Yii::$app->request->queryParams;
-            unset($queryParams['Contact[name]']);
-            Yii::$app->request->queryParams = $queryParams;
-            return $this->actionIndex();
-        }
+        $queryParams = Yii::$app->request->queryParams;
+        unset($queryParams['Contact[name]']);
+        Yii::$app->request->queryParams = $queryParams;
+            
+        return $this->actionIndex();
     }
 
     /**

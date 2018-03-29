@@ -1,10 +1,7 @@
 $('#contactphones-phone_number').focus();
 
-$('body').on('click', '.reset-form', function (e) {
-    $form = $(this).closest('form');
-    $form.find('input').val('');
-    $form[0].submit();
-    // $.pjax.reload({container: '#pjax-contact'});
+$(document).on('pjax:success', function() {
+    $('#contactphones-phone_number').focus();
 });
 
 $(document).on('pjax:error', function() {
