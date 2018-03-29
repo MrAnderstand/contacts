@@ -5,23 +5,13 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Contact;
+use common\models\ContactPhones;
 
 /**
- * ContactSearch represents the model behind the search form of `common\models\Contact`.
+ * ContactPhonesSearch represents the model behind the search form of `common\models\ContactPhones`.
  */
-class ContactSearch extends Contact
+class ContactPhonesSearch extends ContactPhones
 {
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['name'], 'safe'],
-        ];
-    }
-
     /**
      * @inheritdoc
      */
@@ -38,23 +28,16 @@ class ContactSearch extends Contact
      *
      * @return ActiveDataProvider
      */
-    public function search(array $params): ActiveDataProvider
+    public function search(int $contactId, array $params): ActiveDataProvider
     {
-        $query = Contact::find();
+        $query = ContactPhones::find()->where(['contact_id' => $contactId]);
 
         // add conditions that should always apply here
-        
-        $route = Yii::$app->urlManager->createUrl(['contact/index']);
-        
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => [
-                'defaultOrder' => ['created_at' => SORT_DESC],
-                'route' => $route
-            ],
-            'pagination' => [
-                'route' => $route
-            ],
+            'sort' => false,
+            'pagination' => false
         ]);
 
         $this->load($params);
@@ -64,8 +47,6 @@ class ContactSearch extends Contact
             // $query->where('0=1');
             return $dataProvider;
         }
-
-        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

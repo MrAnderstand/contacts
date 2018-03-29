@@ -1,6 +1,8 @@
 <?php
 
 use yii\db\Migration;
+use common\models\Contact;
+use Faker\Factory;
 
 /**
  * Handles the creation of table `user_phone`.
@@ -27,6 +29,23 @@ class m180326_155518_create_contact_phone_table extends Migration
         $this->createIndex('ind_contact_phones_f_contact_id', self::TABLE_NAME, 'contact_id');
         
         $this->addForeignKey('fk_contact_phones_f_contact_id', self::TABLE_NAME, 'contact_id', self::TABLE_CONTACT_NAME, 'id', 'CASCADE', 'CASCADE');
+        
+        $faker = Factory::create('ru_RU');
+        $rows = [];
+        $contacts = Contact::find()->all();
+        foreach ($contacts as $contact) {
+            $phonesCount = rand(0, 5);
+            for ($i = 0; $i < $phonesCount; $i++) {
+                $time = $faker->dateTimeBetween(time($contact->created_at))->getTimestamp();
+                $rows[] = [
+                    'contact_id' => $contact->id,
+                    'phone_number' => $faker->e164PhoneNumber,// tollFreePhoneNumber
+                    'created_at' => $time,
+                    'updated_at' => $time
+                ];
+            }
+        }
+        $this->batchInsert(self::TABLE_NAME, ['contact_id', 'phone_number', 'created_at', 'updated_at'], $rows);
     }
 
     /**

@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Contact */
+/* @var $model common\models\ContactPhones */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="contact-form">
+<div class="contact-phones-form">
 
     <?php $form = ActiveForm::begin([
         'action' => ['create'],
@@ -17,13 +17,15 @@ use yii\widgets\ActiveForm;
             'data-pjax' => 1
         ]]); ?>
 
-    <?= $form->field($model, 'name', [
+    <?= $form->field($model, 'contact_id')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($model, 'phone_number', [
         'inputOptions' => [
             'class' => 'form-control',
-            'placeholder' => $model->getAttributeLabel('name')
+            'placeholder' => $model->getAttributeLabel('phone_number')
         ],
             'template' => "<div class='input-group'>{input}<span class='input-group-btn'>" .
-            Html::submitButton('Добавить контакт', ['class' => 'btn btn-success']) . 
+            Html::submitButton('Добавить номер', ['class' => 'btn btn-success']) . 
             "</span></div>",
     ])->textInput(['maxlength' => true]) ?>
 

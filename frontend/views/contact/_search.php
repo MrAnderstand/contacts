@@ -18,15 +18,17 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-
-    <?= $form->field($model, 'name') ?>
-
-    <?php echo $form->field($model, 'created_at') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
-    </div>
+    <?= $form->field($model, 'name', [
+        'inputOptions' => [
+            'class' => 'form-control',
+            'placeholder' => 'Введите название контакта для поиска',
+            'tabindex'=>0
+        ],
+        'template' => "<div class='input-group'>{input}<span class='input-group-btn'>" .
+            Html::submitButton('Поиск', ['class' => 'btn btn-primary']) . 
+            Html::button('Сброс', ['class' => 'btn btn-default reset-form']) . 
+            "</span></div>\n{hint}\n{error}",
+    ])->textInput(['maxlength' => true]) ?>
 
     <?php ActiveForm::end(); ?>
 

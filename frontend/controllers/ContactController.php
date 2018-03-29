@@ -35,12 +35,25 @@ class ContactController extends Controller
      */
     public function actionIndex()
     {
+        Yii::$app->request->queryParams = array_merge(
+            Yii::$app->session->get('ContactSearchParams', []),
+            Yii::$app->request->queryParams
+        );
+        Yii::$app->session->set('ContactSearchParams', Yii::$app->request->queryParams);
+        
         $searchModel = new ContactSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
+// echo '<pre>';
+// var_dump(Yii::$app->request->queryParams);
+// echo '</pre>';
+// die;
+        $createModel = new Contact();
+        
+        $method = Yii::$app->request->isAjax ? 'renderAjax' : 'render';
+        return $this->$method('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'createModel' => $createModel,
         ]);
     }
 
@@ -54,32 +67,11 @@ class ContactController extends Controller
         $model = new Contact();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            $queryParams = Yii::$app->request->queryParams;
+            unset($queryParams['Contact[name]']);
+            Yii::$app->request->queryParams = $queryParams;
+            return $this->actionIndex();
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing Contact model.
-     * If update is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -89,11 +81,15 @@ class ContactController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
+        // sleep(7);
         $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $queryParams = Yii::$app->request->queryParams;
+        unset($queryParams['id']);
+        unset($queryParams['_pjax']);
+        Yii::$app->request->queryParams = $queryParams;
+        return $this->actionIndex();
     }
 
     /**
@@ -103,7 +99,7 @@ class ContactController extends Controller
      * @return Contact the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Contact::findOne($id)) !== null) {
             return $model;

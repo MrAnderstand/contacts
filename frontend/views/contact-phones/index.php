@@ -1,37 +1,33 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\ContactSearch */
+/* @var $searchModel common\models\ContactPhonesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Контакты';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Изменить контакт: ' . $contactModel->name;
+$this->params['breadcrumbs'][] = ['label' => 'Контакты', 'url' => ['contact/index']];
+$this->params['breadcrumbs'][] = ['label' => $contactModel->name];
+$this->params['breadcrumbs'][] = 'Изменить';
 
-$this->registerJsFile('@web/js/contact.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('@web/js/contact-phones.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
-<div class="contact-index">
+<div class="contact-phones-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(['id' => 'pjax-contact', 'enablePushState' => false, 'timeout' => 5000]); ?>
+    <?php Pjax::begin(['id' => 'pjax-contact-phones', 'enablePushState' => false, 'timeout' => 5000]); ?>
     <?php echo $this->render('_form', ['model' => $createModel]); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             [
-                'attribute' => 'name',
-                'value' => function ($model) {
-                    return Html::a($model->name, Url::toRoute(['contact-phones/index', 'id' => $model->id]), ['data-pjax' => 0]);
-                },
-                'format' => 'raw',      // Html не пропустит data-pjax
+                'attribute' => 'phone_number',
+                'format' => 'html',
             ],
             [
                 'attribute' => 'created_at',
