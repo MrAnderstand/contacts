@@ -43,10 +43,7 @@ class ContactController extends Controller
         
         $searchModel = new ContactSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-// echo '<pre>';
-// var_dump(Yii::$app->request->queryParams);
-// echo '</pre>';
-// die;
+
         $createModel = new Contact();
         
         $method = Yii::$app->request->isAjax ? 'renderAjax' : 'render';

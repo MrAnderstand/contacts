@@ -49,6 +49,14 @@ class SiteController extends Controller
         ];
     }
 
+    public function beforeAction($action)
+    {
+        // Нельзя сюда
+        return $this->goHome();
+        
+        // return parent::beforeAction($action);
+    }
+
     /**
      * {@inheritdoc}
      */

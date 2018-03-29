@@ -36,10 +36,11 @@ class m180326_155518_create_contact_phone_table extends Migration
         foreach ($contacts as $contact) {
             $phonesCount = rand(0, 5);
             for ($i = 0; $i < $phonesCount; $i++) {
-                $time = $faker->dateTimeBetween(time($contact->created_at))->getTimestamp();
+                $date = date_create();
+                $time = $faker->dateTimeBetween(date_timestamp_set($date, $contact->created_at))->getTimestamp();
                 $rows[] = [
                     'contact_id' => $contact->id,
-                    'phone_number' => $faker->e164PhoneNumber,// tollFreePhoneNumber
+                    'phone_number' => '+7 (' . $faker->regexify('\[0-9]{3}') . ') ' . $faker->regexify('\[0-9]{3}-[0-9]{4}'),
                     'created_at' => $time,
                     'updated_at' => $time
                 ];
