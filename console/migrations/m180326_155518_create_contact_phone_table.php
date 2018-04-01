@@ -37,10 +37,12 @@ class m180326_155518_create_contact_phone_table extends Migration
             $phonesCount = rand(0, 5);
             for ($i = 0; $i < $phonesCount; $i++) {
                 $date = date_create();
+                // Скобки в регулярке почему-то не экранируются
+                $phoneNumber = '+7 (' . $faker->regexify('\[0-9]{3}') . ') ' . $faker->regexify('\[0-9]{3}-[0-9]{4}');
                 $time = $faker->dateTimeBetween(date_timestamp_set($date, $contact->created_at))->getTimestamp();
                 $rows[] = [
                     'contact_id' => $contact->id,
-                    'phone_number' => '+7 (' . $faker->regexify('\[0-9]{3}') . ') ' . $faker->regexify('\[0-9]{3}-[0-9]{4}'),
+                    'phone_number' => $phoneNumber,
                     'created_at' => $time,
                     'updated_at' => $time
                 ];

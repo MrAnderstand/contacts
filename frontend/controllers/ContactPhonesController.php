@@ -32,7 +32,9 @@ class ContactPhonesController extends Controller
 
     /**
      * Lists all ContactPhones models.
+     * @param int $id   Id контакта
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionIndex(int $id)
     {
@@ -55,7 +57,6 @@ class ContactPhonesController extends Controller
 
     /**
      * Creates a new ContactPhones model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
@@ -73,8 +74,7 @@ class ContactPhonesController extends Controller
 
     /**
      * Deletes an existing ContactPhones model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $id       Id номера телефона
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */

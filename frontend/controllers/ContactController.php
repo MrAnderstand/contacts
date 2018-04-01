@@ -56,7 +56,6 @@ class ContactController extends Controller
 
     /**
      * Creates a new Contact model.
-     * If creation is successful, the browser will be redirected to the 'index' page.
      * @return mixed
      */
     public function actionCreate()
@@ -74,7 +73,6 @@ class ContactController extends Controller
 
     /**
      * Deletes an existing Contact model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found

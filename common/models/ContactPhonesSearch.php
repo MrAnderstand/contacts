@@ -24,7 +24,8 @@ class ContactPhonesSearch extends ContactPhones
     /**
      * Creates data provider instance with search query applied
      *
-     * @param array $params
+     * @param int $contactId    Id контакта
+     * @param array $params     Параметры фильтров, сортировки
      *
      * @return ActiveDataProvider
      */

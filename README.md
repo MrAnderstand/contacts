@@ -1,60 +1,26 @@
 <p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Advanced Project Template</h1>
+    <h1 align="center">Тестовое задание - Справочник контрагентов</h1>
     <br>
 </p>
 
-Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
+Создайте простое приложение справочника для записи телефонов контрагентов.
+За основу возьмите стандартный шаблон yii2, используйте Twitter Bootstrap для элементов дизайна (адаптивность приложения не важна).
+Приложение должно состоять из двух страниц.
 
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
+a) На главной странице приложения отобразите таблицу с данными имеющихся в базе контактов.
+Таблица должна содержать 2 колонки - "Название контакта" и "Дата добавления".
+Название каждого контакта в таблице должно быть представлено гиперссылкой, при клике на которую Вы должны попадать на страницу редактирования данного контакта.
 
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
+b) На главной странице должна быть возможность добавить новый контакт в базу или удалить имеющиеся.
 
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
+c) На странице редактирования контакта выведите имя контакта и все его телефоны в виде таблицы с колонками "Номер телефона" и "Дата добавления".
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-advanced.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-advanced)
+d) На странице редактирования профиля должна быть возможность добавить новый телефон к редактируемому контакту или удалить добавленные ранее телефоны.
 
-DIRECTORY STRUCTURE
--------------------
+<br>
+Будет плюсом:
+<br><br>
 
-```
-common
-    config/              contains shared configurations
-    mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
-    tests/               contains tests for common classes    
-console
-    config/              contains console configurations
-    controllers/         contains console controllers (commands)
-    migrations/          contains database migrations
-    models/              contains console-specific model classes
-    runtime/             contains files generated during runtime
-backend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
-    controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for backend application    
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for frontend application
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
-vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
-```
+a) Если Вы реализуете удаление контактов/телефонов на ajax (без перезагрузки страницы).
+
+b) Если Вы добавите маску для ввода номера телефона в строго заданном формате (при вводе телефона в браузере).

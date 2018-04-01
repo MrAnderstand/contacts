@@ -34,7 +34,7 @@ class ContactSearch extends Contact
     /**
      * Creates data provider instance with search query applied
      *
-     * @param array $params
+     * @param array $params     Параметры фильтров, сортировки
      *
      * @return ActiveDataProvider
      */
